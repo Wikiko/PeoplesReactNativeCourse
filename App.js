@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import axios from 'axios';
 import Header from './src/components/Header';
 import PeopleList from './src/components/PeopleList';
@@ -39,7 +39,7 @@ export default class App extends React.Component {
       <View>
         <Header title="Pessoas!" />
         {/* {this.renderList()} */}
-        <PeopleList peoples={this.state.peoples}/>
+        <PeopleList peoples={this.state.peoples} />
       </View>
     );
   }
