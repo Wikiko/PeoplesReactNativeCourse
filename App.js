@@ -1,46 +1,48 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import axios from 'axios';
-import Header from './src/components/Header';
-import PeopleList from './src/components/PeopleList';
+import { StackNavigator } from 'react-navigation';
+import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/pages/PeopleDetailPage';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      peoples: [],
-    };
+// +- como fica na versão 2.0 do react-navigation
+// lembrando que apartir do 2.0 não é possível colocar customizar o posicionamento
+// do title.
+// export default createStackNavigator({
+//   Main: {
+//     screen: PeoplePage,
+//     navigationOptions: {
+//       title: 'Pessoas!',
+//       headerStyle: {
+//         backgroundColor: '#ff8a23',
+//         borderBottomWidth: 1,
+//         borderBottomColor: '#C5C5C5',
+//       },
+//       headerTitleStyle: {
+//         fontSize: 30,
+//         color: '#fff',
+//         alignSelf: 'center'
+//       }
+//     }
+//   }
+// });
+// Mostrado no curso porem depreciado!
+export default StackNavigator({
+  Main: {
+    screen: PeoplePage
+  },
+  PeopleDetail: {
+    screen: PeopleDetailPage
   }
-
-  componentDidMount() {
-    axios
-      .get('https://randomuser.me/api/?nat=br&results=5')
-      .then(response => {
-        const { results } = response.data;
-        this.setState({
-          peoples: results,
-        });
-      });
-  }
-
-  renderList() {
-    const textElements = this.state.peoples.map((people) => {
-      const { first } = people.name;
-
-      return <Text key={first}>{first}</Text>
-    });
-
-    return textElements;
-  }
-
-  render() {
-
-    return (
-      <View>
-        <Header title="Pessoas!" />
-        {/* {this.renderList()} */}
-        <PeopleList peoples={this.state.peoples} />
-      </View>
-    );
-  }
-}
+}, {
+    navigationOptions: {
+      title: 'Pessoas!',
+      headerStyle: {
+        backgroundColor: '#ff8a23',
+        borderBottomWidth: 1,
+        borderBottomColor: '#C5C5C5'
+      },
+      headerTitleStyle: {
+        fontSize: 30,
+        color: 'white',
+        alignSelf: 'center'
+      }
+    }
+  });
