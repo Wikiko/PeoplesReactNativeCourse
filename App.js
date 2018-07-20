@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import PeoplePage from './src/pages/PeoplePage';
 import PeopleDetailPage from './src/pages/PeopleDetailPage';
+import { capitalizeFirstLetter } from './src/util';
 
 // +- como fica na versão 2.0 do react-navigation
 // lembrando que apartir do 2.0 não é possível colocar customizar o posicionamento
@@ -29,11 +30,24 @@ export default StackNavigator({
     screen: PeoplePage
   },
   PeopleDetail: {
-    screen: PeopleDetailPage
-  }
+    screen: PeopleDetailPage,
+    navigationOptions: ({ navigation }) => {
+      const peopleName = capitalizeFirstLetter(
+        navigation.state.params.people.name.first
+      );
+      return {
+        title: peopleName,
+        headerTitleStyle: {
+          fontSize: 30,
+          color: 'white',
+        }
+      }
+    }
+  },
 }, {
     navigationOptions: {
       title: 'Pessoas!',
+      headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#ff8a23',
         borderBottomWidth: 1,

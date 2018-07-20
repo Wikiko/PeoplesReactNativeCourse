@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '../util';
 const PeopleListItem = ({ people, navigateToPeopleDetail, ...props }) => {
     const { title, first, last } = people.name;
     return (
-        <TouchableOpacity onPress={navigateToPeopleDetail}>
+        <TouchableOpacity onPress={() => navigateToPeopleDetail({ people })}>
             <View style={styles.line}>
                 <Image style={styles.avatar} source={{ uri: people.picture.thumbnail }} />
                 <Text style={styles.lineText}>

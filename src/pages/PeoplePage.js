@@ -14,7 +14,7 @@ export default class PeoplePage extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://randomuser.me/api/?nat=br&results=5')
+      .get('https://randomuser.me/api/?nat=br&results=150')
       .then(response => {
         const { results } = response.data;
         this.setState({
@@ -39,7 +39,7 @@ export default class PeoplePage extends React.Component {
         {/* {this.renderList()} */}
         <PeopleList
           peoples={this.state.peoples}
-          onPressItem={() => this.props.navigation.navigate('PeopleDetail')} />
+          onPressItem={(pageParams) => this.props.navigation.navigate('PeopleDetail', pageParams)} />
       </View>
     );
   }
