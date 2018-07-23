@@ -14,26 +14,38 @@ export default class PeoplePage extends React.Component {
     };
   }
 
+  renderPage() {
+    if (this.state.loading) {
+      return <ActivityIndicator size="large" color="#ff8a23" />
+    }
+    if (this.state.error) {
+      return <Error />;
+    }
+    return (
+      <PeopleList
+        peoples={this.state.peoples}
+        onPressItem={(pageParams) => this.props.navigation.navigate('PeopleDetail', pageParams)} />
+    );
+  }
+
   componentDidMount() {
     this.setState({ loading: true });
-    setTimeout(() => {
-      axios
-        .get('https://randomuserERRO_PORFAVOR.me/api/?nat=br&results=150')
-        .then(response => {
-          const { results } = response.data;
-          this.setState({
-            peoples: results,
-            loading: false,
-            error: false
-          });
-        })
-        .catch(error => {
-          this.setState({
-            loading: false,
-            error: true
-          });
+    axios
+      .get('https://randomuser.me/api/?nat=br&results=30')
+      .then(response => {
+        const { results } = response.data;
+        this.setState({
+          peoples: results,
+          loading: false,
+          error: false
         });
-    }, 1500);
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error: true
+        });
+      });
   }
 
   renderList() {
@@ -49,15 +61,16 @@ export default class PeoplePage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {
+        {/* {
           this.state.loading
             ? <ActivityIndicator size="large" color="#ff8a23" />
             : this.state.error
-              ? <Error/>
+              ? 
               : <PeopleList
                 peoples={this.state.peoples}
                 onPressItem={(pageParams) => this.props.navigation.navigate('PeopleDetail', pageParams)} />
-        }
+        } */}
+        {this.renderPage()}
       </View>
     );
   }

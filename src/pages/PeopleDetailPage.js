@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
 import Line from '../components/Line';
 
 export default class PeoplePage extends React.Component {
@@ -9,19 +9,21 @@ export default class PeoplePage extends React.Component {
         const { people } = this.props.navigation.state.params;
 
         return (
-            <View style={styles.container}>
-                <Image
-                    style={styles.avatar}
-                    source={{ uri: people.picture.large }} />
-                <View style={styles.detailContainer}>
-                    <Line label="E-mail:" content={people.email} />
-                    <Line label="Cidade:" content={people.location.city} />
-                    <Line label="Estado:" content={people.location.state} />
-                    <Line label="Tel:" content={people.phone} />
-                    <Line label="Cel:" content={people.cell} />
-                    <Line label="Nat:" content={people.nat} />
+            <ScrollView>
+                <View style={styles.container}>
+                    <Image
+                        style={styles.avatar}
+                        source={{ uri: people.picture.large }} />
+                    <View style={styles.detailContainer}>
+                        <Line label="E-mail:" content={people.email} />
+                        <Line label="Cidade:" content={people.location.city} />
+                        <Line label="Estado:" content={people.location.state} />
+                        <Line label="Tel:" content={people.phone} />
+                        <Line label="Cel:" content={people.cell} />
+                        <Line label="Nacionalidade:" content={people.nat} />
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 
@@ -29,6 +31,7 @@ export default class PeoplePage extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 15
     },
     avatar: {
