@@ -14,6 +14,10 @@ export default class PeoplePage extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    headerTitle: 'Pessoas!'
+  };
+
   renderPage() {
     if (this.state.loading) {
       return <ActivityIndicator size="large" color="#ff8a23" />
@@ -61,15 +65,6 @@ export default class PeoplePage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* {
-          this.state.loading
-            ? <ActivityIndicator size="large" color="#ff8a23" />
-            : this.state.error
-              ? 
-              : <PeopleList
-                peoples={this.state.peoples}
-                onPressItem={(pageParams) => this.props.navigation.navigate('PeopleDetail', pageParams)} />
-        } */}
         {this.renderPage()}
       </View>
     );

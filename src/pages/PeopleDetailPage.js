@@ -1,8 +1,17 @@
 import React from 'react';
-import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, ScrollView, Button } from 'react-native';
 import Line from '../components/Line';
+import { capitalizeFirstLetter } from '../util';
 
 export default class PeoplePage extends React.Component {
+    static navigationOptions({ navigation }) {
+        const peopleName = capitalizeFirstLetter(
+            navigation.state.params.people.name.first
+        );
+        return {
+            headerTitle: peopleName
+        };
+    }
 
     render() {
 

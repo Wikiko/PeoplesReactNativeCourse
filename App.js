@@ -1,62 +1,48 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, createStackNavigator } from 'react-navigation';
 import PeoplePage from './src/pages/PeoplePage';
 import PeopleDetailPage from './src/pages/PeopleDetailPage';
-import { capitalizeFirstLetter } from './src/util';
 
-// +- como fica na versão 2.0 do react-navigation
-// lembrando que apartir do 2.0 não é possível colocar customizar o posicionamento
+// +- como fica na versão 2.9.0 do react-navigation
+// lembrando que apartir do 2.9.0 não é possível colocar customizar o posicionamento
 // do title.
-// export default createStackNavigator({
-//   Main: {
-//     screen: PeoplePage,
-//     navigationOptions: {
-//       title: 'Pessoas!',
-//       headerStyle: {
-//         backgroundColor: '#ff8a23',
-//         borderBottomWidth: 1,
-//         borderBottomColor: '#C5C5C5',
-//       },
-//       headerTitleStyle: {
-//         fontSize: 30,
-//         color: '#fff',
-//         alignSelf: 'center'
-//       }
-//     }
-//   }
-// });
-// Mostrado no curso porem depreciado!
-export default StackNavigator({
-  Main: {
-    screen: PeoplePage
+export default createStackNavigator(
+  {
+    Main: PeoplePage,
+    PeopleDetail: PeopleDetailPage
   },
-  PeopleDetail: {
-    screen: PeopleDetailPage,
-    navigationOptions: ({ navigation }) => {
-      const peopleName = capitalizeFirstLetter(
-        navigation.state.params.people.name.first
-      );
-      return {
-        title: peopleName,
-        headerTitleStyle: {
-          fontSize: 30,
-          color: 'white',
-        }
-      }
-    }
-  },
-}, {
+  {
+    initialRouteName: 'Main',
     navigationOptions: {
-      title: 'Pessoas!',
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: '#ff8a23',
         borderBottomWidth: 1,
-        borderBottomColor: '#C5C5C5'
+        borderBottomColor: '#C5C5C5',
       },
       headerTitleStyle: {
+        textAlign: 'center',
         fontSize: 30,
-        color: 'white',
-        alignSelf: 'center'
+        color: 'white'
       }
     }
-  });
+  }
+);
+// Mostrado no curso porem depreciado! - react-navigation 1.0.3
+// export default StackNavigator({
+//   Main: PeoplePage,
+//   PeopleDetail: PeopleDetailPage
+// }, {
+//     navigationOptions: {
+//       headerTintColor: 'white',
+//       headerStyle: {
+//         backgroundColor: '#ff8a23',
+//         borderBottomWidth: 1,
+//         borderBottomColor: '#C5C5C5'
+//       },
+//       headerTitleStyle: {
+//         fontSize: 30,
+//         color: 'white',
+//         alignSelf: 'center'
+//       }
+//     }
+//   });
