@@ -1,21 +1,18 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet } from 'react-native';
+import { FlatList, Text, StyleSheet } from 'react-native';
 import PeopleListItem from './PeopleListItem';
 
 const PeopleList = ({ peoples, onPressItem, ...props }) => {
-
-    const items = peoples.map(people => (
-        <PeopleListItem
-            key={people.name.first}
-            style={styles.line}
-            people={people}
-            navigateToPeopleDetail={onPressItem} />
-    ));
-
     return (
-        <ScrollView style={styles.container}>
-            {items}
-        </ScrollView>
+        <FlatList
+            style={styles.container}
+            data={peoples}
+            keyExtractor={(item) => item.name.title + item.name.first + item.name.last}
+            renderItem={({ item }) => (
+                <PeopleListItem
+                    people={item}
+                    navigateToPeopleDetail={onPressItem} />
+            )} />
     )
 };
 
