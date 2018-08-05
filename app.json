@@ -1,5 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "Pessoas",
+    "version": "1.0.0",
+    "sdkVersion": "27.0.0",
+    "ios":{
+      "bundleIdentifier": "com.williamreactnative.pessoas"
+    },
+    "android": {
+      "package": "com.williamreactnative.pessoas"
+    }
   }
 }
